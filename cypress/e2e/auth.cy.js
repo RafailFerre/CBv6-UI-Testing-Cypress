@@ -1,7 +1,7 @@
 describe("AUTHORIZATION", () => {
   describe("POSITIVE", () => {
     beforeEach(() => {
-      cy.visit("https://clientbase.us/v6/user/login");
+      cy.visit("https://clientbase.pasv.us/v6/user/login");
     });
     it("Sign in with valid credentials", () => {
       cy.get('[name="email"]').type("test@gmail.com");
@@ -14,7 +14,7 @@ describe("AUTHORIZATION", () => {
   });
   describe("NEGATIVE", () => {
     beforeEach(() => {
-      cy.visit("https://clientbase.us/v6/user/login");
+      cy.visit("https://clientbase.pasv.us/v6/user/login");
     });
     it("Sign in with invalid email", () => {
       cy.get('[name="email"]').type("invalid@gmail.com");

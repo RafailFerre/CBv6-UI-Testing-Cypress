@@ -1,7 +1,7 @@
 {
   "name": "cbv6-ui-testing-cypress",
   "version": "1.0.0",
-  "description": "",
+  "description": "UI testing using Cypress for CRM CBv6",
   "main": "index.js",
   "scripts": {
     "cy:open": "npx cypress open",
@@ -12,5 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "cypress": "^13.12.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1"
   }
 }
