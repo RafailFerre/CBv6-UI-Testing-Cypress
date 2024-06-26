@@ -11,7 +11,8 @@
   "author": "Rafail Ferre",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^13.12.0"
+    "cypress": "^13.12.0",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1"
