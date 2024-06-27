@@ -10,8 +10,8 @@ describe("SIGNUP", () => {
 
   describe("POSITIVE", () => {
     beforeEach(() => {
-        cy.visit('/user/register');
-        //cy.visit(`${Cypress.env('baseUrl')}/user/register`);
+        //cy.visit('/user/register');
+        cy.visit(`${Cypress.env('baseUrl')}/user/register`);
         //cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
     });
     it("Sign up with valid credentials", () => {
@@ -23,7 +23,7 @@ describe("SIGNUP", () => {
       cy.get('[type="submit"]').click();
 
       cy.get("div.sidebar").should("be.visible");
-      
+
       cy.get('[aria-label="Search"]').should("be.visible");
       cy.contains(firstName + " " + lastName);
 
@@ -34,8 +34,8 @@ describe("SIGNUP", () => {
 
   describe("NEGATIVE", () => {
     beforeEach(() => {
-        cy.visit('/user/register');
-        //cy.visit(`${Cypress.env('baseUrl')}/user/register`);
+        //cy.visit('/user/register');
+        cy.visit(`${Cypress.env('baseUrl')}/user/register`);
         //cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
     });
     it("Sign up with existing email", () => {

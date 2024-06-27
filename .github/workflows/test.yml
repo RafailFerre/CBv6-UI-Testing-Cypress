@@ -27,6 +27,9 @@ jobs:
         
     - name: Install dependenies
       run: npm i
+
+    - name: Install dotenv
+      run: npm i dotenv
       
     - name: Run Cypress tests
       env:
