@@ -11,6 +11,26 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+
+Cypress.Commands.add('login', (email, password) => {
+    cy.visit(`${Cypress.env('baseUrl')}/user/login`) 
+    cy.get('[name="email"]').type(email);
+    cy.get('[name="password"]').type(password);
+    cy.get('[type="submit"]').click();
+ })
+ // //cy.get('[name="email"]').type(Cypress.env('email'));
+    // cy.get('[name="email"]').type(`${Cypress.env('email')}`);
+ // //cy.get('[name="password"]').type(Cypress.env('password'));
+    // cy.get('[name="password"]').type(`${Cypress.env('password')}`);
+    // cy.get('[type="submit"]').click();
+
+    Cypress.Commands.add('loginByToken', (token, userId) => {
+        cy.visit(`${Cypress.env('baseUrl')}/`)
+        window.localStorage.setItem('token', Cypress.env('token'))
+        window.localStorage.setItem('userId', Cypress.env('userId'))
+        //window.localStorage.setItem('lang', 'en')
+        cy.get('[type="submit"]').click();
+     })
 //
 //
 // -- This is a child command --

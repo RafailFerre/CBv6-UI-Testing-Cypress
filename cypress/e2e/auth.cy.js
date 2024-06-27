@@ -6,16 +6,14 @@ describe("AUTHORIZATION", () => {
       //cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
     });
     it("Sign in with valid credentials", () => {
-      //cy.get('[name="email"]').type(Cypress.env('email'));
-      cy.get('[name="email"]').type(`${Cypress.env('email')}`);
-      //cy.get('[name="password"]').type(Cypress.env('password'));
-      cy.get('[name="password"]').type(`${Cypress.env('password')}`);
-      cy.get('[type="submit"]').click();
-
+      cy.login(`${Cypress.env('email')}`, `${Cypress.env('password')}`);
+      
       cy.get('[aria-label="Search"]').should("be.visible");
       cy.get("#root > div > div > div.header-main.px-3.px-lg-4 > div").click();
 
-      cy.get('[data-qa="profile"]').should("be.visible");
+      cy.get('[aria-label="Search"]').should("be.visible");
+      cy.get("#root > div > div > div.header-main.px-3.px-lg-4 > div").should("be.visible"); //.click();
+      // cy.get('[data-qa="profile"]').should("be.visible");
     });
   });
   describe("NEGATIVE", () => {
@@ -24,10 +22,11 @@ describe("AUTHORIZATION", () => {
       cy.visit(`${Cypress.env('baseUrl')}/user/login`);
     });
     it("Sign in with invalid email", () => {
-      cy.get('[name="email"]').type("invalid@gmail.com");
-      cy.get('[name="password"]').type(`${Cypress.env('password')}`);
-      //cy.get('[name="password"]').type(Cypress.env('password'));
-      cy.get('[type="submit"]').click();
+      cy.login("invalid@gmail", `${Cypress.env('password')}`);
+      // cy.get('[name="email"]').type("invalid@gmail.com");
+      // cy.get('[name="password"]').type(`${Cypress.env('password')}`);
+      // //cy.get('[name="password"]').type(Cypress.env('password'));
+      // cy.get('[type="submit"]').click();
 
       cy.get(".ant-notification-notice").should("be.visible");
 
@@ -35,10 +34,11 @@ describe("AUTHORIZATION", () => {
         .should("have.text", "Auth failed");
     });
     it("Sign in with invalid password", () => {
-      cy.get('[name="email"]').type(`${Cypress.env('email')}`);
-      //cy.get('[name="email"]').type(Cypress.env('email'));
-      cy.get('[name="password"]').type("invalid_password");
-      cy.get('[type="submit"]').click();
+      cy.login(`${Cypress.env('email')}`, "invalid_password");
+      // cy.get('[name="email"]').type(`${Cypress.env('email')}`);
+      // //cy.get('[name="email"]').type(Cypress.env('email'));
+      // cy.get('[name="password"]').type("invalid_password");
+      // cy.get('[type="submit"]').click();
 
       cy.get(".ant-notification-notice").should("be.visible");
 
@@ -46,6 +46,7 @@ describe("AUTHORIZATION", () => {
         .should("have.text", "Auth failed");
     });
     it("Sign in with empty email", () => {
+      // cy.login('', `${Cypress.env('password')}`);
       cy.get('[name="email"]').type(`${Cypress.env('email')}`).clear();
       //cy.get('[name="email"]').type(Cypress.env('email')).clear();
       cy.get('[name="password"]').type(`${Cypress.env('password')}`);
@@ -57,6 +58,7 @@ describe("AUTHORIZATION", () => {
       });
     });
     it("Sign in with empty password", () => {
+      // cy.login(`${Cypress.env('email')}`, '');
       cy.get('[name="email"]').type(`${Cypress.env('email')}`);
       //cy.get('[name="email"]').type(Cypress.env('email'));
       cy.get('[name="password"]').type(`${Cypress.env('password')}`).clear();
