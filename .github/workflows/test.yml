@@ -27,6 +27,13 @@ jobs:
         
     - name: Install dependenies
       run: npm i
+
+    - name: Install dotenv
+      run: npm i dotenv
       
     - name: Run Cypress tests
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+        EMAIL: ${{ secrets.EMAIL }}
+        PASSWORD: ${{ secrets.PASSWORD }}
       run: npx cypress run
