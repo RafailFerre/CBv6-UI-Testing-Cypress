@@ -12,17 +12,16 @@
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 
+import { SignInPage } from "../pages/sign-in"
+
 Cypress.Commands.add('login', (email, password) => {
-    cy.visit(`${Cypress.env('baseUrl')}/user/login`) 
-    cy.get('[name="email"]').type(email);
-    cy.get('[name="password"]').type(password);
-    cy.get('[type="submit"]').click();
+   SignInPage.open();
+   SignInPage.signIn(email, password);
+   //  cy.visit(`${Cypress.env('baseUrl')}/user/login`) 
+   //  cy.get('[name="email"]').type(email);
+   //  cy.get('[name="password"]').type(password);
+   //  cy.get('[type="submit"]').click();
  })
- // //cy.get('[name="email"]').type(Cypress.env('email'));
-    // cy.get('[name="email"]').type(`${Cypress.env('email')}`);
- // //cy.get('[name="password"]').type(Cypress.env('password'));
-    // cy.get('[name="password"]').type(`${Cypress.env('password')}`);
-    // cy.get('[type="submit"]').click();
 
     Cypress.Commands.add('loginByToken', (token, userId) => {
         cy.visit(`${Cypress.env('baseUrl')}/`)

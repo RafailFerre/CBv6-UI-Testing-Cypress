@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { SignUpPage } from "../pages/sign-up";
 
 describe("SIGNUP", () => {
 
@@ -10,17 +11,25 @@ describe("SIGNUP", () => {
 
   describe("POSITIVE", () => {
     beforeEach(() => {
+        SignUpPage.open();
         //cy.visit('/user/register');
-        cy.visit(`${Cypress.env('baseUrl')}/user/register`);
+        //cy.visit(`${Cypress.env('baseUrl')}/user/register`);
         //cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
     });
     it("Sign up with valid credentials", () => {
-      cy.get('[name="companyName"]').type(companyName);
-      cy.get('[name="firstName"]').type(firstName);
-      cy.get('[name="lastName"]').type(lastName);
-      cy.get('[name="email"]').type(email);
-      cy.get('[name="password"]').type(password);
-      cy.get('[type="submit"]').click();
+      SignUpPage.signUp(companyName, firstName, lastName, email, password);
+      // SignUpPage.companyNameField.type(companyName);
+      // SignUpPage.firstNameField.type(firstName);
+      // SignUpPage.lastNameField.type(lastName);
+      // SignUpPage.emailField.type(email);
+      // SignUpPage.passwordField.type(password);
+      // SignUpPage.submitButton.click();
+      // cy.get('[name="companyName"]').type(companyName);
+      // cy.get('[name="firstName"]').type(firstName);
+      // cy.get('[name="lastName"]').type(lastName);
+      // cy.get('[name="email"]').type(email);
+      // cy.get('[name="password"]').type(password);
+      // cy.get('[type="submit"]').click();
 
       cy.get('[class*="ri-menu-2-fill"]').should("be.visible");
 
@@ -34,60 +43,72 @@ describe("SIGNUP", () => {
 
   describe("NEGATIVE", () => {
     beforeEach(() => {
-        //cy.visit('/user/register');
-        cy.visit(`${Cypress.env('baseUrl')}/user/register`);
-        //cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
+        SignUpPage.open();
     });
     it("Sign up with existing email", () => {
-      cy.get('[name="companyName"]').type(companyName);
-      cy.get('[name="firstName"]').type(firstName);
-      cy.get('[name="lastName"]').type(lastName);
-      cy.get('[name="email"]').type(email);
-      cy.get('[name="password"]').type(password);
-      cy.get('[type="submit"]').click();
+      SignUpPage.companyNameField.type(companyName);
+      SignUpPage.firstNameField.type(firstName);
+      SignUpPage.lastNameField.type(lastName);
+      SignUpPage.emailField.type(email);
+      SignUpPage.passwordField.type(password);
+      SignUpPage.submitButton.click();
+
+      cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
 
       cy.get(".ant-notification-notice").should("be.visible");
     });
+    
     it("Sign up with out first name", () => {
-      cy.get('[name="companyName"]').type(companyName);
-      cy.get('[name="firstName"]').type(firstName).clear();
-      cy.get('[name="lastName"]').type(lastName);
-      cy.get('[name="email"]').type("1" + email);
-      cy.get('[name="password"]').type(password);
-      cy.get('[type="submit"]').click();
+      SignUpPage.companyNameField.type(companyName);
+      SignUpPage.firstNameField.clear();
+      SignUpPage.lastNameField.type(lastName);
+      SignUpPage.emailField.type("1" + email);
+      SignUpPage.passwordField.type(password);
+      SignUpPage.submitButton.click();
+
+      cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
 
       cy.get(".ant-notification-notice").should("be.visible");
     });
-    it("Sign up with out first name", () => {
-      cy.get('[name="companyName"]').type(companyName);
-      cy.get('[name="firstName"]').type(firstName);
-      cy.get('[name="lastName"]').type(lastName).clear();
-      cy.get('[name="email"]').type("2" + email);
-      cy.get('[name="password"]').type(password);
-      cy.get('[type="submit"]').click();
+
+    it("Sign up with out last name", () => {
+      SignUpPage.companyNameField.type(companyName);
+      SignUpPage.firstNameField.type(firstName);
+      SignUpPage.lastNameField.clear();
+      SignUpPage.emailField.type("2" + email);
+      SignUpPage.passwordField.type(password);
+      SignUpPage.submitButton.click();
+
+      cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
 
       cy.get(".ant-notification-notice").should("be.visible");
     });
+
     it("Sign up with out email", () => {
-      cy.get('[name="companyName"]').type(companyName);
-      cy.get('[name="firstName"]').type(firstName);
-      cy.get('[name="lastName"]').type(lastName);
-      cy.get('[name="email"]').type(email).clear();
-      cy.get('[name="password"]').type(password);
-      cy.get('[type="submit"]').click();
+      SignUpPage.companyNameField.type(companyName);
+      SignUpPage.firstNameField.type(firstName);
+      SignUpPage.lastNameField.type(lastName);
+      SignUpPage.emailField.clear();
+      SignUpPage.passwordField.type(password);
+      SignUpPage.submitButton.click();
 
+      cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
+      
       cy.on("window:alert", (text) => {
         expect(text).to.contains("Please fill out this field");
       });
     });
-    it("Sign up with out password", () => {
-      cy.get('[name="companyName"]').type(companyName);
-      cy.get('[name="firstName"]').type(firstName);
-      cy.get('[name="lastName"]').type(lastName);
-      cy.get('[name="email"]').type("3" + email);
-      cy.get('[name="password"]').type(password).clear();
-      cy.get('[type="submit"]').click();
 
+    it("Sign up with out password", () => {
+      SignUpPage.companyNameField.type(companyName);
+      SignUpPage.firstNameField.type(firstName);
+      SignUpPage.lastNameField.type(lastName);
+      SignUpPage.emailField.type("3" + email);
+      SignUpPage.passwordField.clear();
+      SignUpPage.submitButton.click();
+
+      cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
+      
       cy.on("window:alert", (text) => {
         expect(text).to.contains("Please fill out this field");
       });
