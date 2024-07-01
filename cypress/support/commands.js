@@ -12,7 +12,7 @@
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 
-import { SignInPage } from "../pages/sign-in"
+import SignInPage from "../pages/Sign-in"
 
 Cypress.Commands.add('login', (email, password) => {
    SignInPage.open();

@@ -1,5 +1,5 @@
-import { SignInPage } from "../pages/sign-in";
-
+import SignInPage from "../pages/Sign-in";
+// import  { SignUpPage }  from "../pages/sign-up";
 
 describe("AUTHORIZATION", () => {
   describe("POSITIVE", () => {
@@ -40,10 +40,10 @@ describe("AUTHORIZATION", () => {
       // SignInPage.passwordField.type(`${Cypress.env('password')}`);
       // SignInPage.submitButton.click();
 
-      cy.get(".ant-notification-notice").should("be.visible");
-
-      cy.get(".ant-notification-notice-message")
-        .should("have.text", "Auth failed");
+      SignInPage.toast.should("be.visible").and("have.text", "Auth failed");
+      // cy.get(".ant-notification-notice")
+      //   .should("be.visible")
+      //   .should("have.text", "Auth failed");
 
       cy.url().should("eq", `${Cypress.env('baseUrl')}/user/login`);
     });
@@ -51,10 +51,7 @@ describe("AUTHORIZATION", () => {
     it("Sign in with invalid password", () => {
       SignInPage.signIn(`${Cypress.env('email')}`, "invalid_password");
 
-      cy.get(".ant-notification-notice").should("be.visible");
-
-      cy.get(".ant-notification-notice-message")
-        .should("have.text", "Auth failed");
+      SignInPage.toast.should("be.visible").and("have.text", "Auth failed");
 
       cy.url().should("eq", `${Cypress.env('baseUrl')}/user/login`);
     });

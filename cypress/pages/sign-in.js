@@ -1,4 +1,6 @@
-class SignIn {
+import BasePage from "./Base"
+
+class SignInPage extends BasePage {
 
     get emailField() { return cy.get('[name="email"]') }
 
@@ -29,4 +31,6 @@ class SignIn {
     // }
 }
 
-export const SignInPage = new SignIn()
+export default new SignInPage;
+
+// export const SignInPage = new SignIn()
