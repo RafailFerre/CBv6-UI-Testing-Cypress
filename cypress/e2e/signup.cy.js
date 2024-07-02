@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
-import  SignUpPage  from "../pages/Sign-up";
-// import  { SignUpPage }  from "../pages/sign-up"; //if using const SignUpPage from "../pages/sign-up"; 
+// import  SignUpPage  from "../pages/Sign-up";
+import { SignUpPage } from "../pages/Sign-up";  //if using const SignUpPage from "../pages/sign-up";
 
 describe("SIGNUP", () => {
 

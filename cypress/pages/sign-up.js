@@ -1,6 +1,6 @@
 import BasePage from "./Base"
 
-class SignUpPage extends BasePage {
+class SignUp extends BasePage {
 
     get companyNameField() { return cy.get('[name="companyName"]') }
 
@@ -28,6 +28,6 @@ class SignUpPage extends BasePage {
     }
 }
 
-export default new SignUpPage();
+// export default new SignUpPage();
 
-// export const SignUpPage = new SignUp()
+export const SignUpPage = new SignUp()
