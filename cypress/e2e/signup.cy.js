@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
-import { SignUpPage } from "../pages/sign-up";
+import  SignUpPage  from "../pages/sign-up"
+// import { SignUpPage } from "../pages/sign-up";  //if using const SignUpPage from "../pages/sign-up";
 
 describe("SIGNUP", () => {
 
@@ -49,13 +50,27 @@ describe("SIGNUP", () => {
       SignUpPage.companyNameField.type(companyName);
       SignUpPage.firstNameField.type(firstName);
       SignUpPage.lastNameField.type(lastName);
-      SignUpPage.emailField.type(email);
+      SignUpPage.emailField.type(`${Cypress.env('email')}`);
       SignUpPage.passwordField.type(password);
       SignUpPage.submitButton.click();
 
       cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
 
-      cy.get(".ant-notification-notice").should("be.visible");
+      SignUpPage.toast.should("be.visible").and("have.text", "User with this e-mail exists");
+      // cy.get(".ant-notification-notice").should("be.visible").should("have.text", "User with this e-mail exists");
+    });
+
+    it("Sign up with invalid password less than 5 characters", () => {
+      SignUpPage.companyNameField.type(companyName);
+      SignUpPage.firstNameField.type(firstName);
+      SignUpPage.lastNameField.type(lastName);
+      SignUpPage.emailField.type(`${Cypress.env('email')}`);
+      SignUpPage.passwordField.type("1234");
+      SignUpPage.submitButton.click();
+
+      cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
+
+      SignUpPage.toast.should("be.visible").and("have.text", "Wrong password format");
     });
     
     it("Sign up with out first name", () => {
@@ -68,7 +83,7 @@ describe("SIGNUP", () => {
 
       cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
 
-      cy.get(".ant-notification-notice").should("be.visible");
+      SignUpPage.toast.should("be.visible").and("have.text", "User was not created");
     });
 
     it("Sign up with out last name", () => {
@@ -81,7 +96,7 @@ describe("SIGNUP", () => {
 
       cy.url().should("eq", `${Cypress.env('baseUrl')}/user/register`);
 
-      cy.get(".ant-notification-notice").should("be.visible");
+      SignUpPage.toast.should("be.visible").and("have.text", "User was not created");;
     });
 
     it("Sign up with out email", () => {

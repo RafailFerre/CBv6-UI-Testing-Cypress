@@ -7,7 +7,7 @@
 // });
 
 before(() => {
-    cy.request('POST', 'https://clientbase-server.herokuapp.com/v6/user/login', {
+    cy.request('POST', 'https://clientbase-server-edu-dae6cac55393.herokuapp.com/v6/user/login', {
         email: `${Cypress.env('email')}`, password: `${Cypress.env('password')}`
     }).then((response) => {
         Cypress.env('token', response.body.payload.token)
