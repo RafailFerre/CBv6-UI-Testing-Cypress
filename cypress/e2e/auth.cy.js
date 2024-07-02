@@ -1,5 +1,5 @@
-//import SignInPage from "../pages/Sign-in";
-import { SignInPage } from "../pages/Sign-in";
+import SignInPage from "../pages/sign-in";
+// import { SignInPage } from "../pages/sign-in";
 
 describe("AUTHORIZATION", () => {
   describe("POSITIVE", () => {
