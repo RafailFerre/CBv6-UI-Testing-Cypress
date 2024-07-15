@@ -1,6 +1,6 @@
 import BasePage from "./Base"
 
-class SignUpPage extends BasePage {
+class SignUp extends BasePage {
 
     get companyNameField() { return cy.get('[name="companyName"]') }
 
@@ -15,7 +15,8 @@ class SignUpPage extends BasePage {
     get submitButton() { return cy.get('[type="submit"]') }
     
     open() {
-        cy.visit(`${Cypress.env('baseUrl')}/user/register`);
+        cy.visit('/user/register');
+        // cy.visit(`${Cypress.env('baseUrl')}/user/register`);
     }
 
     signUp(companyName, firstName, lastName, email, password) {
@@ -28,6 +29,6 @@ class SignUpPage extends BasePage {
     }
 }
 
-export default new SignUpPage();
+export const SignUpPage = new SignUp()
 
-// export const SignUpPage = new SignUp()
+// export default new SignUpPage();

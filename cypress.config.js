@@ -3,11 +3,12 @@ const dotenv = require("dotenv").config();
 
 module.exports = defineConfig({
   e2e: {
-    //baseUrl: "https://clientbase.pasv.us/v6",
+    baseUrl: process.env.BASE_URL,
     env: {
       baseUrl: process.env.BASE_URL,
       email: process.env.EMAIL,
       password: process.env.PASSWORD,
+      apiUrl: process.env.API_URL
     },
 
     watchForFileChanges: false,

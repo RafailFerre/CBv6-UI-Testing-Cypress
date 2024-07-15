@@ -1,6 +1,6 @@
 import BasePage from "./Base"
 
-class SignInPage extends BasePage {
+class SignIn extends BasePage {
 
     get emailField() { return cy.get('[name="email"]') }
 
@@ -9,7 +9,8 @@ class SignInPage extends BasePage {
     get submitButton() { return cy.get('[type="submit"]') }
     
     open() {
-        cy.visit(`${Cypress.env('baseUrl')}/user/login`);
+        cy.visit('/user/login');
+        // cy.visit(`${Cypress.env('baseUrl')}/user/login`);
     }
 
     signIn(email, password) {
@@ -31,6 +32,6 @@ class SignInPage extends BasePage {
     // }
 }
 
-export default new SignInPage;
+// export default new SignInPage;
 
-// export const SignInPage = new SignIn()
+export const SignInPage = new SignIn()

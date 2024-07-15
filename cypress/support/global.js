@@ -7,10 +7,10 @@
 // });
 
 before(() => {
-    cy.request('POST', 'https://clientbase-server-edu-dae6cac55393.herokuapp.com/v6/user/login', {
-        email: `${Cypress.env('email')}`, password: `${Cypress.env('password')}`
+    cy.request('POST', `${Cypress.env('apiUrl')}/user/login`, {
+        email: Cypress.env('email'), password: Cypress.env('password')
     }).then((response) => {
         Cypress.env('token', response.body.payload.token)
-        Cypress.env('userId', response.body.payload._id)
+        Cypress.env('userId', response.body.payload.userId)
     })
 });
