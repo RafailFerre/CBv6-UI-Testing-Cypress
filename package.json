@@ -6,7 +6,8 @@
   "scripts": {
     "cy:open": "npx cypress open",
     "cy:run": "npx cypress run",
-    "prettier": "npx prettier . --write"
+    "format": "npx prettier ./ --write --list-different",
+    "lint": "prettier ./ --check"
   },
   "keywords": [],
   "author": "Rafail Ferre",
@@ -16,6 +17,8 @@
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1"
+    "@faker-js/faker": "^8.4.1",
+    "chance": "^1.1.12",
+    "prettier": "^3.3.2"
   }
 }
