@@ -34,6 +34,7 @@ jobs:
     - name: Run Cypress tests
       env:
         BASE_URL: ${{ secrets.BASE_URL }}
+        API_URL: ${{ secrets.API_URL }}
         EMAIL: ${{ secrets.EMAIL }}
         PASSWORD: ${{ secrets.PASSWORD }}
       run: npx cypress run
